@@ -65,6 +65,7 @@ void del_list(list &L,int location)
   {
     L.number_list[location].number = 0;
     std::strcpy(L.number_list[location].name,"虚位以待");//这边的长度是不变的
+    DelBank(L,location);
   }
 }
 
@@ -74,6 +75,20 @@ void add_list(list &L,char name[20],int number)
   std::strcpy(L.number_list[L.length].name, name);
   L.number_list[L.length].number = number;
   L.length++;
+}
+
+void insert(list &L,int location,char name[20],int number)
+{
+  if(L.length == MAXSIZE) 
+  {
+    std::cout << "数组已经满了" << std::endl;
+    return;
+  }
+  for(int i = L.length;i>location;i--)
+  {
+    L.number_list[i+1].number =  L.number_list[i].number;
+    
+  }
 }
 
 void show_list(const list &L)
