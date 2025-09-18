@@ -63,8 +63,8 @@ void del_list(list &L,int location)
   }
   else
   {
-    L.number_list[location].number = 0;
-    std::strcpy(L.number_list[location].name,"虚位以待");//这边的长度是不变的
+    L.number_list[location-1].number = 0;
+    std::strcpy(L.number_list[location-1].name,"虚位以待");//这边的长度是不变的
     DelBank(L,location);
   }
 }
@@ -85,10 +85,10 @@ void insert(list &L,int location,char name[20],int number)
     return;
   }
   for(int i = L.length;i>location;i--)
-  {
-    L.number_list[i+1].number =  L.number_list[i].number;
-    std::strcpy(L.number_list[i+1].name,L.number_list[i].name);
-  }
+  // {
+  //   L.number_list[i+1].number =  L.number_list[i].number;
+  //   std::strcpy(L.number_list[i+1].name,L.number_list[i].name);
+  // }
   L.number_list[location].number = number;
   std::strcpy(L.number_list[location].name,name);
 }
@@ -104,12 +104,20 @@ void show_list(const list &L)
 }
 int main()
 {
-  char name[4] = "cyc"; 
+  char name1[4] = "cyc"; 
+  char name2[4] = "dzx"; 
+  char name3[4] = "cqy"; 
+  char name4[4] = "cjl"; 
   std::cout << "Hello world!" <<std::endl;
   list list1 = Init_list();
-  add_list(list1,name,43);
+  add_list(list1,name1,1);
+  add_list(list1,name2,2);
+  add_list(list1,name3,3);
+  add_list(list1,name4,4);
+  del_list(list1,2);
   show_list(list1);
-  del_list(list1,1);
+  insert(list1,1,name2,5);
+  std::cout << "插入后" << std::endl;
   show_list(list1);
   return 0;
 }
